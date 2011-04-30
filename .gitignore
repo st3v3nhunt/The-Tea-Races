@@ -1,1 +1,13 @@
+#Mac OSX
+.DS_Store
+Icon?
+
+#Thumbnails
+._*
+Thumbs.db
+Desktop.ini
+
+#TextMate
 *.tmproj
+*.tmproject
+tmtags
