@@ -1,0 +1,12 @@
+TODO:
+* Have the canvas dynamically resize to the width of the browser.
+* Make the winner known.
+* Have a countdown of the race.
+* Allow the user to start the race through a button.
+* Allow the duration of the race to be set by the user.
+* Get some tests done!
+
+DONE:
+* Have a single car moving across the page with a linear time frame.
+* Have a single car moving across the page with a variable timings.
+* Have multiple cars moving across the page with variable timings.
