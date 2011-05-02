@@ -42,6 +42,7 @@ function dummyCar () {
 			return true;
 		}
 	};
+	this.stop = function () {};
 }
 
 test('Starting the race starts all registered entrants.', function () {
@@ -56,4 +57,11 @@ test('Starting the race starts all registered entrants.', function () {
 
 	ok(car1.start(), 'Car not started when race started.');
 	ok(car2.start(), 'Car not started when race started.');
+});
+
+test('Race distance is set on Race construction', function () {
+	var distance = 1000;
+	var race = new Race(distance);
+	
+	equals(race.getDistance(), distance, 'Race distance is not set on race construction.');
 });

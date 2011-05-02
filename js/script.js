@@ -10,38 +10,25 @@ window['Page'] = function Page () {
 		$canvas.height = height-2;
 		$canvas.width = width-2;
 	};
-
-	this.getContext = function () {
-		return $context;
-	};
 };
 
-window['Car'] = function Car (context, name, x, y) {
+window['Car'] = function Car (name) {
 	var self = this,
 	 timerId = 0,
-			 ctx = context,
-		xStart = x,
-		yStart = y,
-				 x = x,
-				 y = y,
+				 x = 0,
+				 y = 0,
 			name = name;
 
 	this.getName = function () { return name; };
 
 	this.getDistance = function () { return x; };
 
-	this.drawCar = function () {
-		ctx.fillRect(x,y,10,10);
-	};
-
-	this.clearCar = function () {
-		ctx.clearRect(xStart,yStart,10+x,10+y);
-	};
+	this.getStartPosition = function () { return y; };
+	
+	this.setStartPosition = function (value) { y = value; };
 
 	this.start = function () {
 		timerId = setInterval( function () {
-								self.clearCar();
-								self.drawCar();
 								x = x+Math.floor(Math.random()*3+1);
 							}, 10);
 	};
@@ -51,11 +38,25 @@ window['Car'] = function Car (context, name, x, y) {
 	};
 };
 
-window['Race'] = function Race () {
-	var self = this,
-	entrants = [],
-	duration = ($(document).width() - 100 / 2) * 5;
+window['Race'] = function Race (canvas) {
+		var self = this,
+		entrants = [],
+			canvas = canvas,
+				 ctx = canvas.getContext('2d'),
+raceDuration = (ctx.canvas.width - 100 / 2) * 5;
+
+	drawRace = function () {
+		for (var i=0;i<entrants.length;i++) {
+			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
+		}
+	};
 	
+	clearRace = function () {
+		ctx.clearRect(0,0,$(document).width(), $(document).height());
+	};
+
+	this.getDistance = function () { return distance; };
+
 	this.getEntrants = function () { return entrants; };
 
 	this.registerEntrants = function (cars) {
@@ -65,10 +66,16 @@ window['Race'] = function Race () {
 	};
 
 	this.start = function () {
+		var startingLocation = 0;
 		for (var i=0;i < entrants.length; i++) {
+			entrants[i].setStartPosition(startingLocation+=50);
 			entrants[i].start();
 		}
-		setTimeout(stop, duration);
+		setInterval(function () {
+			clearRace();
+			drawRace();
+			}, 10);
+		setTimeout(stop, raceDuration);
 	};
 
 	declareWinnner = function () {
@@ -95,15 +102,16 @@ window['Race'] = function Race () {
 })();
 
 $(document).ready(function () {
-	var page = new Page();
-	page.setCanvasSize();
+	var page = new Page(),
+			 car = new Car('me'),
+			car2 = new Car('you'),
+			car3 = new Car('them'),
+			cars = [car, car2, car3],
+	 $canvas = $('#canvas')[0];
 
-	var car = new Car(page.getContext(), 'me', 50, 50);
-	var car2 = new Car(page.getContext(), 'you', 50, 150);
-	var car3 = new Car(page.getContext(), 'them', 50, 250);
-	var cars = [car, car2, car3];
+	page.setCanvasSize()
 
-	var race = new Race();
+	var race = new Race($canvas);
 	race.registerEntrants(cars);
 	race.start();
 });
