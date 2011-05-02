@@ -25,9 +25,9 @@ test('Car Factory creates as many Car objects as names it is provided with - for
 		var fred = 'fred',
 	carFactory = new CarFactory([fred]);
 
-	equal(carFactory.length, 1, 'Single name does not return a single object.');
-	deepEqual(carFactory[0], new Car(), 'Single name does not return a single object.');
-	equal(carFactory[0].getName(), fred, 'Single name does not return a single object.');
+	equal(carFactory.length, 1, 'Single name does not return a single element.');
+	deepEqual(carFactory[0], new Car(), 'Single name does not return an object.');
+	equal(carFactory[0].getName(), fred, 'Single name does not return an object with the correct name.');
 });
 
 test('Car Factory creates as many Car objects as names it is provided with - for several names.', function () {
@@ -35,13 +35,18 @@ test('Car Factory creates as many Car objects as names it is provided with - for
 			barney = 'barney',
 	carFactory = new CarFactory([fred, barney]);
 
-	equal(carFactory.length, 2, 'Single name does not return a single object.');
-	deepEqual(carFactory[0], new Car(), 'Single name does not return a single object.');
-	deepEqual(carFactory[1], new Car(), 'Single name does not return a single object.');
-	equal(carFactory[0].getName(), fred, 'Single name does not return a single object.');
-	equal(carFactory[1].getName(), barney, 'Single name does not return a single object.');
+	equal(carFactory.length, 2, 'Two names do not return two elements.');
+	deepEqual(carFactory[0], new Car(), 'Two names do not return an object for the first element.');
+	deepEqual(carFactory[1], new Car(), 'Two names do not return an object for the second element.');
+	equal(carFactory[0].getName(), fred, 'Two names does not return an object with the correct name for the first object.');
+	equal(carFactory[1].getName(), barney, 'Two names does not retun an object with the correct name for the second object.');
 });
 
+test('Text inputs displayed for the number of participants', function () {
+	new Page().setup();
+	
+	$('input')
+});
 /*
 test('A single entrant can be registered for a race.', function () {
 	var race = new Race();
