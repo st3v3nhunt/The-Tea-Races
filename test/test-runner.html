@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script src="libs/jquery-1.5.2.js"></script>
 	<link rel="stylesheet" href="css/qunit.css" type="text/css" media="screen" />
 	<script src="libs/qunit.js"></script>
+
+	<script>
+		(function () {
+			$.fn.ready = function () {
+				console.log('$.ready has been overridden.');
+			};
+		})()
+	</script>
 
 	<!--Place scripts to be tested below this comment-->
 	<script src="../js/script.js"></script>
 
 	<!--Place test scripts below this comment-->
-	<!--<script src="page.test.js"></script>-->
-	<script src="car.test.js"></script>
+	<script src="page.test.js"></script>
+	<!--<script src="car.test.js"></script>-->
+
 
 </head>
 <body>

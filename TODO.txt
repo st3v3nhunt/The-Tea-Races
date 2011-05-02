@@ -1,6 +1,6 @@
 TODO:
 * Have the canvas dynamically resize to the width of the browser when browser is changed size.
-* Make the winner known.
+* Make the winner known on the page.
 * Have a countdown of the race.
 * Allow the user to start the race through a button.
 * Allow the duration of the race to be set by the user.
