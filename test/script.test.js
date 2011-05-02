@@ -1,15 +1,24 @@
 test('Car returns a name.', function () {
-	var name = 'me';
-	var car = new Car(null, name);
+	var fred = 'fred';
+	var car = new Car(fred);
 
-	equal(car.getName(), name, 'No name returned from the car.');
+	equal(car.getName(), fred, 'Incorrect name returned from the car.');
 });
 
-test('Car returns the distance travelled.', function () {
-	var distance = 100;
-	var car = new Car(null, '', distance, 0);
+test('2 cars can exist with different names.', function () {
+	var fred = 'me';
+	var barney = 'barney';
+	var carFred = new Car(fred);
+	var carBarney = new Car(barney);
 
-	equal(car.getDistance(), distance, 'No name returned from the car.');
+	equal(carFred.getName(), fred, 'Incorrect name returned from the car.');
+	equal(carBarney.getName(), barney, 'Incorrect name returned from the car.');
+});
+
+test('Car returns the distance travelled before race as 0.', function () {
+	var car = new Car('');
+
+	equal(car.getDistance(), 0, '0 not returned as the distance travelled before the race.');
 });
 
 test('A single entrant can be registered for a race.', function () {
