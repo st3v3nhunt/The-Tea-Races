@@ -8,7 +8,7 @@ window.log = function(){
 
 
 (function () {
-window['CarFactory'] = function CarFactory (names) {
+window.CarFactory = function CarFactory (names) {
 	var cars = [];
 	for (var i=0;i<names.length;i++) {
 		cars.push(new Car(names[i]));
@@ -16,14 +16,14 @@ window['CarFactory'] = function CarFactory (names) {
 	return cars;
 };
 
-window['Car'] = function Car (name) {
+window.Car = function Car (name) {
 	var self = this,
 				 x = 0,
 				 y = 0,
 	 timerId = 0,
-			name = name;
+	 carName = name;
 
-	this.getName = function () { return name; };
+	this.getName = function () { return carName; };
 
 	this.getDistance = function () { return x; };
 
@@ -42,10 +42,9 @@ window['Car'] = function Car (name) {
 	};
 };
 
-window['Race'] = function Race (canvas) {
+window.Race = function Race (canvas) {
 		var self = this,
 		entrants = [],
-			canvas = canvas,
 				 ctx = canvas.getContext('2d');
 
 	getDuration = function () {
@@ -107,7 +106,7 @@ window['Race'] = function Race (canvas) {
 	};
 };
 
-window['Venue'] = function Venue () {
+window.Venue = function Venue () {
 	setCanvasDimensions();
 
 	var cars = new CarFactory(['me', 'you', 'us', 'who']),
@@ -124,5 +123,5 @@ function setCanvasDimensions () {
 		 $canvas = $('#canvas')[0];
 	$canvas.height = height-2;
 	$canvas.width = width-2;
-};
+}
 })();

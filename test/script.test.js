@@ -45,7 +45,7 @@ test('Car Factory creates as many Car objects as names it is provided with - for
 test('Text inputs displayed for the number of participants', function () {
 	new Page().setup();
 	
-	$('input')
+	$('input');
 });
 /*
 test('A single entrant can be registered for a race.', function () {

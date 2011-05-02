@@ -1,5 +1,5 @@
 (function () {
-	window['Page'] = function Page () {
+	window.Page = function Page () {
 		this.setup = function () {
 			
 		};
