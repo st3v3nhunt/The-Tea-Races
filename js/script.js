@@ -1,4 +1,12 @@
 (function () {
+window['CarFactory'] = function CarFactory (names) {
+	var cars = [];
+	for (var i=0;i<names.length;i++) {
+		cars.push(new Car(names[i]));
+	}
+	return cars;
+};
+
 window['Car'] = function Car (name) {
 	var self = this,
 				 x = 0,
@@ -102,12 +110,9 @@ function setCanvasDimensions () {
 $(document).ready(function () {
 	setCanvasDimensions();
 
-	var car = new Car('me'),
-		 car2 = new Car('you'),
-		 car3 = new Car('them'),
-		 cars = [car, car2, car3],
-	$canvas = $('#canvas').get(0),
-		 race = new Race($canvas);
+	var cars = new CarFactory(['me', 'you', 'us']),
+	 $canvas = $('#canvas').get(0),
+			race = new Race($canvas);
 
 	race.registerEntrants(cars);
 	race.startRace();

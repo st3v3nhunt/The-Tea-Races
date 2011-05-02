@@ -21,6 +21,28 @@ test('Car returns the distance travelled before race as 0.', function () {
 	equal(car.getDistance(), 0, '0 not returned as the distance travelled before the race.');
 });
 
+test('Car Factory creates as many Car objects as names it is provided with - for a single name.', function () {
+		var fred = 'fred',
+	carFactory = new CarFactory([fred]);
+
+	equal(carFactory.length, 1, 'Single name does not return a single object.');
+	deepEqual(carFactory[0], new Car(), 'Single name does not return a single object.');
+	equal(carFactory[0].getName(), fred, 'Single name does not return a single object.');
+});
+
+test('Car Factory creates as many Car objects as names it is provided with - for several names.', function () {
+		var fred = 'fred',
+			barney = 'barney',
+	carFactory = new CarFactory([fred, barney]);
+
+	equal(carFactory.length, 2, 'Single name does not return a single object.');
+	deepEqual(carFactory[0], new Car(), 'Single name does not return a single object.');
+	deepEqual(carFactory[1], new Car(), 'Single name does not return a single object.');
+	equal(carFactory[0].getName(), fred, 'Single name does not return a single object.');
+	equal(carFactory[1].getName(), barney, 'Single name does not return a single object.');
+});
+
+/*
 test('A single entrant can be registered for a race.', function () {
 	var race = new Race();
 	var car = new Car();
@@ -74,3 +96,4 @@ test('Race distance is set on Race construction', function () {
 	
 	equals(race.getDistance(), distance, 'Race distance is not set on race construction.');
 });
+*/
