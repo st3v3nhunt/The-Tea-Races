@@ -26,7 +26,7 @@ window['Car'] = function Car (context, name, x, y) {
 				 y = y,
 			name = name;
 
-	this.name = function () { return name; };
+	this.getName = function () { return name; };
 
 	this.getDistance = function () { return x; };
 
@@ -55,8 +55,10 @@ window['Race'] = function Race () {
 	var self = this,
 	entrants = [],
 	duration = ($(document).width() - 100 / 2) * 5;
+	
+	this.getEntrants = function () { return entrants; };
 
-	this.registerCars = function (cars) {
+	this.registerEntrants = function (cars) {
 		for (var i=0; i<cars.length; i++) {
 			entrants.push(cars[i]);
 		}
@@ -74,7 +76,7 @@ window['Race'] = function Race () {
 		for (var i=0;i < entrants.length; i++) {
 			var entrantDistance = entrants[i].getDistance();
 			if (entrantDistance > winner.distance) {
-				winner.name = entrants[i].name();
+				winner.name = entrants[i].getName();
 			} else if (entrantDistance === winner.distance) {
 				winner.name = 'DRAW!';
 			}
@@ -102,6 +104,6 @@ $(document).ready(function () {
 	var cars = [car, car2, car3];
 
 	var race = new Race();
-	race.registerCars(cars);
+	race.registerEntrants(cars);
 	race.start();
 });
