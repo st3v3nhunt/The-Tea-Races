@@ -86,10 +86,11 @@ window.Race = function Race (canvas) {
 			var entrantDistance = entrants[i].getDistance();
 			if (entrantDistance > winner.distance) {
 				winner.name = entrants[i].getName();
+				winner.distance = entrantDistance;
 			} else if (entrantDistance === winner.distance) {
 				winner.name = 'DRAW!';
+				winner.distance = entrantDistance;
 			}
-			winner.distance = entrantDistance;
 		}
 		console.log('The winner is: ' + winner.name + ' with a distance of: ' + winner.distance);
 	};

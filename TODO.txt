@@ -1,4 +1,5 @@
 TODO:
+* Only redraw the path the car has taken.
 * Draw lanes for the cars.
 * Size the height of the race track only as large as it needs to be for the number of cars taking part.
 * Have the finish line be a checkerboard effect.
