@@ -24,7 +24,7 @@ window.Car = function Car (name) {
 
 	function move () {
 			x += Math.floor(Math.random() * 3+1);
-	};
+	}
 
 	this.getName = function () { return carName; };
 
@@ -52,7 +52,7 @@ window.Race = function Race (canvas) {
 
 	function getFinishLine () {
 		return ctx.canvas.width - 50;
-	};
+	}
 
 	function drawLine (name, position) {
 		ctx.moveTo(position + 0.5, 15);
@@ -63,22 +63,22 @@ window.Race = function Race (canvas) {
 		ctx.textBaseline = 'top';
 		ctx.textAlign = 'center';
 		ctx.fillText(name, position, 0);
-	};
+	}
 
 	function setupRaceTrack () {
 		drawLine('Start', startPosition);
 		drawLine('Finish', getFinishLine());
-	};
+	}
 
 	function drawRaceTrack () {
 		for (var i=0; i<entrants.length; i++) {
 			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
 		}
-	};
+	}
 
 	function clearRaceTrack () {
 		ctx.clearRect(startPosition,15,getFinishLine() - startPosition, ctx.canvas.height - 15);
-	};
+	}
 
 	function declareWinnner () {
 		var winner = { name: '', distance: 0 };
@@ -93,7 +93,7 @@ window.Race = function Race (canvas) {
 			}
 		}
 		console.log('The winner is: ' + winner.name + ' with a distance of: ' + winner.distance);
-	};
+	}
 
 	function stopRace () {
 		for (var i=0; i<entrants.length; i++) {
@@ -101,7 +101,7 @@ window.Race = function Race (canvas) {
 		}
 		clearInterval(raceTimer);
 		declareWinnner();
-	};
+	}
 
 	function checkRaceStatus () {
 		for (var i=0; i<entrants.length; i++) {
@@ -109,7 +109,7 @@ window.Race = function Race (canvas) {
 				stopRace();
 			}
 		}
-	};
+	}
 
 	this.getEntrants = function () { return entrants; };
 
