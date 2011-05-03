@@ -55,8 +55,8 @@ window.Race = function Race (canvas) {
 	};
 
 	function drawLine (name, position) {
-		ctx.moveTo(position, 10);
-		ctx.lineTo(position, ctx.canvas.height);
+		ctx.moveTo(position + 0.5, 15);
+		ctx.lineTo(position + 0.5, ctx.canvas.height);
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		ctx.font = 'bold 10px sans-serif';
@@ -65,16 +65,19 @@ window.Race = function Race (canvas) {
 		ctx.fillText(name, position, 0);
 	};
 
-	function drawRace () {
+	function setupRaceTrack () {
+		drawLine('Start', startPosition);
+		drawLine('Finish', getFinishLine());
+	};
+
+	function drawRaceTrack () {
 		for (var i=0; i<entrants.length; i++) {
 			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
 		}
 	};
 
-	function clearRace () {
-		ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
-		drawLine('Start', startPosition);
-		drawLine('Finish', getFinishLine());
+	function clearRaceTrack () {
+		ctx.clearRect(startPosition,15,getFinishLine() - startPosition, ctx.canvas.height - 15);
 	};
 
 	function declareWinnner () {
@@ -121,9 +124,10 @@ window.Race = function Race (canvas) {
 			entrants[i].setStartPosition(startPosition, startingLocation+=50);
 			entrants[i].start();
 		}
+		setupRaceTrack();
 		raceTimer = setInterval(function () {
-			clearRace();
-			drawRace();
+			clearRaceTrack();
+			drawRaceTrack();
 			checkRaceStatus();
 			}, 10);
 	};
