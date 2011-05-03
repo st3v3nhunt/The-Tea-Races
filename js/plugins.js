@@ -23,6 +23,10 @@ window.Car = function Car (name) {
 	 timerId = 0,
 	 carName = name;
 
+	function move () {
+			x += Math.floor(Math.random() * 3+1);
+	};
+
 	this.getName = function () { return carName; };
 
 	this.getDistance = function () { return x; };
@@ -32,9 +36,7 @@ window.Car = function Car (name) {
 	this.setStartPosition = function (value) { y = value; };
 
 	this.start = function () {
-		timerId = setInterval( function move () {
-			x += Math.floor(Math.random() * 3+1);
-		}, 10);
+		timerId = setInterval( move, 10);
 	};
 
 	this.stop = function () {
@@ -45,20 +47,43 @@ window.Car = function Car (name) {
 window.Race = function Race (canvas) {
 		var self = this,
 		entrants = [],
+		 timerId = 0,
 				 ctx = canvas.getContext('2d');
 
-	getDuration = function () {
+	function getDuration () {
 		return (ctx.canvas.width - 100 / 2) * 5;
 	};
 
-	drawRace = function () {
+	function drawRace () {
 		for (var i=0;i<entrants.length;i++) {
 			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
 		}
 	};
 	
-	clearRace = function () {
-		ctx.clearRect(0,0,$(document).width(), $(document).height());
+	function clearRace () {
+		ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+	};
+
+	function declareWinnner () {
+		var winner = { name: '', distance: 0, draw: false };
+		for (var i=0;i < entrants.length; i++) {
+			var entrantDistance = entrants[i].getDistance();
+			if (entrantDistance > winner.distance) {
+				winner.name = entrants[i].getName();
+			} else if (entrantDistance === winner.distance) {
+				winner.name = 'DRAW!';
+			}
+			winner.distance = entrantDistance;
+		}
+		console.log('The winner is: ' + winner.name + ' with a distance of: ' + winner.distance);
+	};
+
+	function stopRace () {
+		for (var i=0;i < entrants.length; i++) {
+			entrants[i].stop();
+		}
+		clearInterval(timerId);
+		declareWinnner();
 	};
 
 	this.getDistance = function () { return distance; };
@@ -77,32 +102,11 @@ window.Race = function Race (canvas) {
 			entrants[i].setStartPosition(startingLocation+=50);
 			entrants[i].start();
 		}
-		setInterval(function () {
+		timerId = setInterval(function () {
 			clearRace();
 			drawRace();
 			}, 10);
 		setTimeout(stopRace, getDuration());
-	};
-
-	declareWinnner = function () {
-		var winner = { name: '', distance: 0, draw: false };
-		for (var i=0;i < entrants.length; i++) {
-			var entrantDistance = entrants[i].getDistance();
-			if (entrantDistance > winner.distance) {
-				winner.name = entrants[i].getName();
-			} else if (entrantDistance === winner.distance) {
-				winner.name = 'DRAW!';
-			}
-			winner.distance = entrantDistance;
-		}
-		console.log('The winner is: ' + winner.name + ' with a distance of: ' + winner.distance);
-	};
-
-	stopRace = function () {
-		for (var i=0;i < entrants.length; i++) {
-			entrants[i].stop();
-		}
-		declareWinnner();
 	};
 };
 
