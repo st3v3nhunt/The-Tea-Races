@@ -53,6 +53,18 @@ window.Race = function Race (canvas) {
 		return ctx.canvas.width - 50;
 	};
 
+	function drawFinishLine () {
+		var finish = ctx.canvas.width - 50;
+		ctx.moveTo(finish, 10);
+		ctx.lineTo(finish, ctx.canvas.height);
+		ctx.lineWidth = 2;
+		ctx.stroke();
+		ctx.font = 'bold 10px sans-serif';
+		ctx.textBaseline = 'top';
+		ctx.textAlign = 'center';
+		ctx.fillText('Finish', finish, 0);
+	};
+
 	function drawRace () {
 		for (var i=0; i<entrants.length; i++) {
 			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
@@ -61,6 +73,7 @@ window.Race = function Race (canvas) {
 	
 	function clearRace () {
 		ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+		drawFinishLine();
 	};
 
 	function declareWinnner () {

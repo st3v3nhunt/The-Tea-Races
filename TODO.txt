@@ -1,5 +1,7 @@
 TODO:
-* Make the race finish when the cars cross the line.
+* Draw lanes for the cars.
+* Size the height of the race track only as large as it needs to be for the number of cars taking part.
+* Have the finish line be a checkerboard effect.
 * Have the canvas dynamically resize to the width of the browser when browser is changed size.
 * Make the winner known on the page.
 * Have a countdown of the race.
@@ -15,3 +17,5 @@ DONE:
 * Have multiple cars moving across the page with variable timings.
 * Have the canvas dynamically resize to the width of the browser on page load.
 * Have the total time work with the width of the browser.
+* Make the race finish when the cars cross the line.
+* Draw a finish line on the canvas.
