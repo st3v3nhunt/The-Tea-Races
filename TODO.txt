@@ -11,6 +11,7 @@ TODO:
 * Have the race track render under the cars.
 * Have the race track snake around the screen.
 * Get some tests done!
+* Does the winner make the brews or do we really need to know the loser?
 
 DONE:
 * Have a single car moving across the page with a linear time frame.

@@ -134,10 +134,10 @@ window.Race = function Race (canvas) {
 	};
 };
 
-window.Venue = function Venue () {
+window.Venue = function Venue (names) {
 	setCanvasDimensions();
 
-	var cars = new CarFactory(['me', 'you', 'us', 'who']),
+	var cars = new CarFactory(names),
 	 $canvas = $('#canvas').get(0),
 			race = new Race($canvas);
 

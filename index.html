@@ -23,12 +23,13 @@
 		</header>
 
 		<div id="main" role="main">
-			<form class="hidden">
+			<input id="demo" type="button" value="Demo Race"></input>
+			<form id="form" class="">
 				<label for="racers">How many participants are there?</label>
-				<input id="racers" type="text" value="0"></input>
+				<input id="racers" type="number" min="0" max="10" value="0"></input>
 				<input id="start" type="button" value="Start Race"></input>
 			</form>
-			<canvas id="canvas" style="border:1px red solid;"></canvas>
+			<canvas id="canvas"></canvas>
 		</div>
 
 		<footer>
