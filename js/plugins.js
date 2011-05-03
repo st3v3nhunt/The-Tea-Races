@@ -6,11 +6,10 @@ window.log = function(){
 };
 (function(b){function c(){}for(var d="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn".split(","),a;a=d.pop();)b[a]=b[a]||c})(window.console=window.console||{});
 
-
 (function () {
 window.CarFactory = function CarFactory (names) {
 	var cars = [];
-	for (var i=0;i<names.length;i++) {
+	for (var i=0; i<names.length; i++) {
 		cars.push(new Car(names[i]));
 	}
 	return cars;
@@ -47,15 +46,15 @@ window.Car = function Car (name) {
 window.Race = function Race (canvas) {
 		var self = this,
 		entrants = [],
-		 timerId = 0,
+	 raceTimer = 0,
 				 ctx = canvas.getContext('2d');
 
-	function getDuration () {
-		return (ctx.canvas.width - 100 / 2) * 5;
+	function getFinishLine () {
+		return ctx.canvas.width - 50;
 	};
 
 	function drawRace () {
-		for (var i=0;i<entrants.length;i++) {
+		for (var i=0; i<entrants.length; i++) {
 			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
 		}
 	};
@@ -65,8 +64,8 @@ window.Race = function Race (canvas) {
 	};
 
 	function declareWinnner () {
-		var winner = { name: '', distance: 0, draw: false };
-		for (var i=0;i < entrants.length; i++) {
+		var winner = { name: '', distance: 0 };
+		for (var i=0; i<entrants.length; i++) {
 			var entrantDistance = entrants[i].getDistance();
 			if (entrantDistance > winner.distance) {
 				winner.name = entrants[i].getName();
@@ -79,14 +78,20 @@ window.Race = function Race (canvas) {
 	};
 
 	function stopRace () {
-		for (var i=0;i < entrants.length; i++) {
+		for (var i=0; i<entrants.length; i++) {
 			entrants[i].stop();
 		}
-		clearInterval(timerId);
+		clearInterval(raceTimer);
 		declareWinnner();
 	};
 
-	this.getDistance = function () { return distance; };
+	function checkRaceStatus () {
+		for (var i=0; i<entrants.length; i++) {
+			if (entrants[i].getDistance() >= getFinishLine()) {
+				stopRace();
+			}
+		}
+	};
 
 	this.getEntrants = function () { return entrants; };
 
@@ -98,15 +103,15 @@ window.Race = function Race (canvas) {
 
 	this.startRace = function () {
 		var startingLocation = 0;
-		for (var i=0;i < entrants.length; i++) {
+		for (var i=0; i<entrants.length; i++) {
 			entrants[i].setStartPosition(startingLocation+=50);
 			entrants[i].start();
 		}
-		timerId = setInterval(function () {
+		raceTimer = setInterval(function () {
 			clearRace();
 			drawRace();
+			checkRaceStatus();
 			}, 10);
-		setTimeout(stopRace, getDuration());
 	};
 };
 
