@@ -1,9 +1,12 @@
 TODO:
+* Make the race finish when the cars cross the line.
 * Have the canvas dynamically resize to the width of the browser when browser is changed size.
 * Make the winner known on the page.
 * Have a countdown of the race.
 * Allow the user to start the race through a button.
 * Allow the duration of the race to be set by the user.
+* Have the race track render under the cars.
+* Have the race track snake around the screen.
 * Get some tests done!
 
 DONE:
