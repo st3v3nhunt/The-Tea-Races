@@ -32,7 +32,7 @@ window.Car = function Car (name) {
 
 	this.getStartPosition = function () { return y; };
 
-	this.setStartPosition = function (value) { y = value; };
+	this.setStartPosition = function (X, Y) { x = X; y = Y; };
 
 	this.start = function () {
 		timerId = setInterval( move, 10);
@@ -44,25 +44,25 @@ window.Car = function Car (name) {
 };
 
 window.Race = function Race (canvas) {
-		var self = this,
-		entrants = [],
-	 raceTimer = 0,
-				 ctx = canvas.getContext('2d');
+			var self = this,
+			entrants = [],
+		 raceTimer = 0,
+ startPosition = 50,
+					 ctx = canvas.getContext('2d');
 
 	function getFinishLine () {
 		return ctx.canvas.width - 50;
 	};
 
-	function drawFinishLine () {
-		var finish = ctx.canvas.width - 50;
-		ctx.moveTo(finish, 10);
-		ctx.lineTo(finish, ctx.canvas.height);
+	function drawLine (name, position) {
+		ctx.moveTo(position, 10);
+		ctx.lineTo(position, ctx.canvas.height);
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		ctx.font = 'bold 10px sans-serif';
 		ctx.textBaseline = 'top';
 		ctx.textAlign = 'center';
-		ctx.fillText('Finish', finish, 0);
+		ctx.fillText(name, position, 0);
 	};
 
 	function drawRace () {
@@ -70,10 +70,11 @@ window.Race = function Race (canvas) {
 			ctx.fillRect(entrants[i].getDistance(),entrants[i].getStartPosition(),10,10);
 		}
 	};
-	
+
 	function clearRace () {
 		ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
-		drawFinishLine();
+		drawLine('Start', startPosition);
+		drawLine('Finish', getFinishLine());
 	};
 
 	function declareWinnner () {
@@ -117,7 +118,7 @@ window.Race = function Race (canvas) {
 	this.startRace = function () {
 		var startingLocation = 0;
 		for (var i=0; i<entrants.length; i++) {
-			entrants[i].setStartPosition(startingLocation+=50);
+			entrants[i].setStartPosition(startPosition, startingLocation+=50);
 			entrants[i].start();
 		}
 		raceTimer = setInterval(function () {
